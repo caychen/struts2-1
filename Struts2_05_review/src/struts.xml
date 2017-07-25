@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+   
+<struts>
+	<constant name="struts.custom.i18n.resources" value="translations"></constant>
+	<package name="test" namespace="/" extends="struts-default">
+		<result-types>
+			<result-type name="some" class="result.SomeResult"></result-type>
+		</result-types>
+		<global-results>
+			<result></result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="" exception=""></exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="test" class="action.TestAction">
+			<result name="daoError">/WEB-INF/jsp/error.jsp</result>
+			<result name="success" type="some">
+				<param name="root">emp</param>
+			</result>
+			<exception-mapping result="daoError" exception="dao.DAOException"></exception-mapping>
+		</action>
+		
+		<action name="some" class="action.SomeAction">
+			<result>/WEB-INF/jsp/i18nTest.jsp</result>
+		</action>
+	</package>
+	
+</struts>

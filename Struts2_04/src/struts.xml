@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+   
+<struts>
+	<package name="test" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="some" class="interceptor.SomeInterceptor"></interceptor>
+			<interceptor name="other" class="interceptor.OtherInterceptor"></interceptor>
+			
+			<!--拦截器栈相当于一组拦截器的组合-->
+			<!--在引用的时候，就当作一个拦截器-->
+			<interceptor-stack name="all">
+				
+			</interceptor-stack>
+			
+		</interceptors>
+		<action name="some" class="action.SomeAction">
+			<result>/WEB-INF/jsp/some.jsp</result>
+
+			<!--如果自己定义了拦截器，需要把默认的拦截器包含进来，最好放在自定义拦截器之前，最少也要包含basicStack-->
+			<interceptor-ref name="defaultStack"></interceptor-ref>			
+			<!-- 引用拦截器，name为拦截器的name，此处为some -->
+			<interceptor-ref name="some"></interceptor-ref>
+			<interceptor-ref name="other"></interceptor-ref>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+    <!-- package提供了将多个Action组织为一个模块的方式
+        package的名字必须是唯一的, 
+        	package可以扩展,当一个package扩展自另一个package时,该package会在本身配置的基础上加入扩展的package的配置,父package必须在子package前配置 
+        name：package名称
+        extends:继承的父package名称
+        abstract:设置package的属性为抽象的,抽象的package不能定义action ,值true/false
+        namespace:
+        	定义package命名空间,该命名空间影响到url的地址，
+        	例如此命名空间为/test,那么访问是的地址为http://localhost:8080/struts2/test/XX.action
+     -->
+     
+<struts>
+	<package name="one" namespace="/Struts2_01" extends="struts-default">
+		 
+		 <!-- Action配置 一个Action可以被多次映射(只要action配置中的name不同)
+             name：action名称
+             class: 对应的类的路径
+             method: 调用Action中的方法名,如果不提供method属性，那么在类中的方法名必须为execute(),返回值为String
+        -->
+        <!--
+        	http://localhost:8080/Struts2_01/Struts2_01/hello.action
+        -->
+		<action name="hello" class="One.HelloAction">
+			<result name="success">/WEB-INF/jsp/Hello.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="loginform" class="Action.LoginFormAction">
+			<result name="success">/WEB-INF/jsp/loginform.jsp</result>
+		</action>
+		
+		<action name="login" class="Action.LoginAction">
+			<result name="success">/WEB-INF/jsp/main.jsp</result>
+			<result name="error">/WEB-INF/jsp/loginform.jsp</result>
+		</action>
+	</package>
+</struts>
